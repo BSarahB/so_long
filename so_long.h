@@ -74,6 +74,7 @@ int			ft_isrectangle(char **tab_map, t_utils *ptr);
 void		ft_get_items_number(char *tab_line, t_utils *ptr);
 void		ft_check_number_of_items(t_utils *ptr);
 void		ft_get_images_id(t_utils *ptr);
+int			ft_fail_load_xpm_ressources(t_utils *ptr, char *str);
 int			ft_push_assets_to_window(t_utils *ptr, char **tab_map);
 void		ft_move(t_utils *ptr, int key);
 void		ft_destroy_and_update_image(t_utils *ptr, int key);
@@ -86,7 +87,6 @@ char		*ft_strjoin2(char const *s1, char const *s2);
 char		*ft_not_strchr(const char *s, int c);
 int			ft_strlen(const char *str);
 int			ft_strcmp(char *s1, char *s2);
-void		ft_error(char *const str);
 void		ft_putstr_fd(char *s, int fd);
 void		ft_free_struct_utils(t_utils *ptr);
 void		ft_free_struct_tab(char **p);
@@ -98,13 +98,12 @@ char		**ft_split(char const *s, char c);
 void		ft_putstr_fd(char *s, int fd);
 void		ft_error(char *const str);
 int			ft_error_and_exit(char *const str);
-int			ft_strcmp(char *s1, char *s2);
+int			ft_error2(char *const str, t_utils *ptr);
+int			ft_error3(char *const str, t_utils *ptr);
 int			ft_strcmp(char *s1, char *s2);
 char		*ft_strrchr(const char *s, int c);
 float		ft_minimum(float x, float y);
 char		*ft_itoa(int n);
 void		ft_rescale(t_utils *ptr);
-
-
 
 #endif

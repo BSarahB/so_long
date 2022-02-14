@@ -23,7 +23,7 @@ void	ft_free_struct_str(char **p)
 void	ft_free_struct_tab(char **tab)
 {
 	int	i;
-
+//TODO mettre bien a NULL
 	i = 0;
 	if (tab != NULL)
 	{

@@ -19,12 +19,7 @@ int	ft_check_invalid_format(char **argv, t_utils *ptr)
 	c = '.';
 	format = ft_strrchr(argv[1], c);
 	if (format == NULL || ft_strcmp(".ber", format))
-	{
-		ft_error("Error\nmap format is invalid, usage : file map.ber\n");
-		free(ptr);
-		ptr = NULL;
-		exit(0);
-	}
+		ft_error2("Error\nmap format is invalid, usage : file map.ber\n", ptr);
 	return (0);
 }
 
@@ -35,11 +30,6 @@ int	ft_check_error_file(char **argv, t_utils *ptr)
 	ft_check_invalid_format(argv, ptr);
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
-	{
-		ft_error("Error\nNo such file or directory\n");
-		free(ptr);
-		ptr = NULL;
-		exit (0);
-	}
+		ft_error2("Error\nNo such file or directory\n", ptr);
 	return (fd);
 }

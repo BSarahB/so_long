@@ -50,7 +50,7 @@ int	deal_key(int key, t_utils *ptr)
 	}
 	if (ptr ->finish == 1)
 	{
-		printf("congratulations! you won! so chami!\nRelaunch to play again!\n");
+		printf("congratulations!you won!So Chami!\nRelaunch to play again!\n");
 		ft_free_and_exit(ptr);
 	}
 	return (0);
@@ -72,7 +72,6 @@ void	ft_rescale(t_utils *ptr)
 		(*ptr).xpm_size = (int)(smallest_ratio * DEFAULT_XPM_SIZE);
 		if ((*ptr).xpm_size < MIN_XPM_SIZE)
 		{
-			//forcer
 			(*ptr).xpm_size = MIN_XPM_SIZE;
 		}
 		(*ptr).y = ft_get_size_of_tabmap((*ptr).tab_map) * (*ptr).xpm_size;
@@ -83,23 +82,19 @@ void	ft_rescale(t_utils *ptr)
 	free(xpm_size_string);
 }
 
-
 void	ft_initialize(t_utils *ptr)
 {
 	(*ptr).mlx = mlx_init();
 	if (!(*ptr).mlx)
-		ft_error_and_exit("mlx_init() fails to set up the connection to the X server\n");
-
+		ft_error3("mlx_init() fails to set up connection to Xserver\n", ptr);
 	ft_rescale(ptr);
 	(*ptr).win = mlx_new_window((*ptr).mlx, (*ptr).x, (*ptr).y, "so_long");
-	if (!(*ptr).mlx)
+	if (!(*ptr).win)
+	{
+		ft_free_struct_utils(ptr);
 		ft_error_and_exit("mlx_new_window() fails to create a new window\n");
-
+	}
 	ft_get_images_id(ptr);
-	//ft_push_assets_to_window(ptr, (*ptr).tab_map);	//xvar->win_list = new_win;
-	//mlx_int_anti_resize_win(((t_xvar *)(*ptr).mlx), ((t_win_list *)((*ptr).win))->window, 400, 400);
-	//mlx_int_anti_resize_win(((t_xvar *)(*ptr).mlx), ((t_xvar *)((*ptr).mlx))->win_list->window, 400, 400); //(t_xvar *xvar,Window win,int w,int h)
-
 	ft_push_assets_to_window(ptr, (*ptr).tab_map);
 	mlx_key_hook((*ptr).win, deal_key, ptr);
 	mlx_hook((*ptr).win, 33, 1L << 17, ft_free_and_exit, ptr);
@@ -132,10 +127,6 @@ int	main(int ac, char *argv[])
 		ft_initialize(ptr);
 	}
 	else
-	{
-		free(ptr);
-		ptr = NULL;
-		ft_error_and_exit("Error\nusage: ./so_long map.ber\n");
-	}
+		ft_error2("Error\nusage: ./so_long map.ber\n", ptr);
 	return (0);
 }

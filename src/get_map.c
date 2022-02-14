@@ -54,7 +54,7 @@ int	ft_push_assets_to_window(t_utils *ptr, char **tab_map)
 	return (0);
 }
 
-void	ft_get_images_id_aux(t_utils *ptr, char *str, void **asset)
+void	*ft_get_images_id_aux(t_utils *ptr, char *str, void **asset)
 {
 	char	*str_joined;
 
@@ -62,77 +62,60 @@ void	ft_get_images_id_aux(t_utils *ptr, char *str, void **asset)
 	*asset = mlx_xpm_file_to_image \
 			((*ptr).mlx, str_joined, &(*ptr).pixel_x, &(*ptr).pixel_y);
 	ft_free_struct_str(&str_joined);
-	if (!(*asset))
-		ft_error_and_exit("Failed to load xpm ressources or asset\n");
+	return (*asset);
+
+}
+
+int	ft_fail_load_xpm_ressources(t_utils *ptr, char *str)
+{
+	if (*str == 'e' )
+		mlx_destroy_image((*ptr).mlx, (*ptr).avatar);
+	else if (*str == 'c')
+	{
+		mlx_destroy_image((*ptr).mlx, (*ptr).avatar);
+		mlx_destroy_image((*ptr).mlx, (*ptr).exit);
+	}
+	else if (*str == 's')
+	{
+		mlx_destroy_image((*ptr).mlx, (*ptr).avatar);
+		mlx_destroy_image((*ptr).mlx, (*ptr).exit);
+		mlx_destroy_image((*ptr).mlx, (*ptr).collectible);
+	}
+	else if (*str == 'w')
+	{
+		mlx_destroy_image((*ptr).mlx, (*ptr).avatar);
+		mlx_destroy_image((*ptr).mlx, (*ptr).exit);
+		mlx_destroy_image((*ptr).mlx, (*ptr).collectible);
+		mlx_destroy_image((*ptr).mlx, (*ptr).scene);
+	}
+	mlx_destroy_window((*ptr).mlx, (*ptr).win);
+	mlx_destroy_display((*ptr).mlx);
+	ft_free_struct_utils(ptr);
+	printf("Failed to load xpm ressources or asset : %s.xpm\n", str);
+	exit (0);
 }
 
 void	ft_get_images_id(t_utils *ptr)
 {
-	ft_get_images_id_aux(ptr, "/avatar.xpm", &(*ptr).avatar);
-	ft_get_images_id_aux(ptr, "/exit.xpm", &(*ptr).exit);
-	ft_get_images_id_aux(ptr, "/npxfess.xpm", &(*ptr).collectible);
-	ft_get_images_id_aux(ptr, "/scene.xpm", &(*ptr).scene);
-	ft_get_images_id_aux(ptr, "/wall.xpm", &(*ptr).wall);
-}
-/*
-void ft_resize(const char *src, int srcWidth, int srcHeight, char *dst, int dstWidth, int dstHeight, int numComponents)
-{
-	int srcPitch = srcWidth * numComponents;
-//code fait une boucle examine le spixels fait la moyenne et les ecrit dans la destination
-	float ratioX = (float)srcWidth / dstWidth;
-	float ratioY = (float)srcHeight / dstHeight;
+	void	*asset;
 
-	for (int y = 0; y < dstHeight; y++) {
-		int iY = y * ratioY;
-
-		int offsetY = iY * srcPitch;
-
-		for (int x = 0; x < dstWidth; x++) {
-			int iX = x * ratioX;
-
-			int offsetX = iX * numComponents;
-
-			const char *srcPtrY = &src[offsetY];//const T *srcPtrY = &src[offsetY];
-
-			for (int i = 0; i < numComponents; i++) {
-				*dst++ = srcPtrY[offsetX + i];
-			}
-		}
-	}
+	asset = ft_get_images_id_aux(ptr, "/avatar.xpm", &(*ptr).avatar);
+	if (!asset)
+		ft_fail_load_xpm_ressources(ptr, "avatar");
+	asset = ft_get_images_id_aux(ptr, "/exit.xpm", &(*ptr).exit);
+	if (!asset)
+		ft_fail_load_xpm_ressources(ptr, "exit");
+	asset = ft_get_images_id_aux(ptr, "/npxfess.xpm", &(*ptr).collectible);
+	if (!asset)
+		ft_fail_load_xpm_ressources(ptr, "collectible");
+	asset = ft_get_images_id_aux(ptr, "/scene.xpm", &(*ptr).scene);
+	if (!asset)
+		ft_fail_load_xpm_ressources(ptr, "scene");
+	asset = ft_get_images_id_aux(ptr, "/wall.xpm", &(*ptr).wall);
+	if (!asset)
+		ft_fail_load_xpm_ressources(ptr, "wall");
 }
 
- void	*mlx_xpm_to_image(void *mlx_ptr, char **xpm_data, int *width, int *height);
-void	*mlx_xpm_to_image(t_xvar *xvar,char **data,int *width,int *height)//ret un void *
-{
-  return (mlx_int_xpm_f_image(xvar,width,height,XpmCreateImageFromData,(void *)data));
-}
-
-
-//1fonction generique qui resize le pointeur et a l intrieur on alloue une image temporaire
-void ft_resize_image(void *mlx, void *image, int new_w, int new_h)
-{
-	t_img	*img;
-	char	*tmp_resized_data;
-	char	*tmp_img_data;
-	char	*img_data;
-	void	*image_original;
-	void	*image_resized;
-
-	img = (t_img *)image;
-	img_data = (*img).data;//on a acces aux pixels (ligne 92 mlx_int.h)
-
-	image_original = image;//on memorise l adresse de l endroit o se trouve les pixels de l image
-	tmp_resized_data = malloc(sizeof(char) * (new_h * new_w));//une image c est comme un tableau a 2 dimensions
-	ft_resize(img_data, (*img).width, (*img).height, tmp_resized_data, new_w, new_h, 3);
-	image_resized = mlx_xpm_to_image((t_xvar *)mlx, &tmp_resized_data, &new_w ,&new_h);
-
-	*image = tmp_resized_data;
-	mlx_destroy_image((*ptr).mlx, tmp_src);
-
-}
-
-
-*/
 void	get_map(int fd, t_utils *ptr)
 {
 	char	*ans;
@@ -141,12 +124,8 @@ void	get_map(int fd, t_utils *ptr)
 
 	flag_empty_line = 0;
 	ans = get_next_line(fd);
-	if (!ans)
-	{
-		free(ptr);
-		ptr = NULL;
-		ft_error_and_exit("Error\nthe map is empty\n");
-	}
+	if (!ans)	
+		ft_error2("Error\nthe map is empty\n", ptr);
 	all_ans = ft_init_string(0);
 	while (ans)
 	{
@@ -163,26 +142,9 @@ void	get_map(int fd, t_utils *ptr)
 	(*ptr).tab_map = ft_split(all_ans, '\n');
 	free(all_ans);
 	if (!(*ptr).tab_map)
-	{
-		free(ptr);
-		ptr = NULL;
-		ft_error_and_exit("Error\nthe map is not set correctly\n");
-	}
+		ft_error2("Error\nthe map is not set correctly\n", ptr);
 	if (close(fd) == -1)
-	{
-		ft_error("close() failed \n");
-		ft_free_struct_tab((*ptr).tab_map);
-		free(ptr);
-		ptr = NULL;
-		exit (0);
-	}
+		ft_error3("close() failed \n", ptr);
 	if (flag_empty_line == 1)
-	{
-		ft_free_struct_tab((*ptr).tab_map);
-		free(ptr);
-		ptr = NULL;
-		ft_error_and_exit("Error\n empty line is not authorized in map\n");
-		exit (0);
-	}
-
+		ft_error3("Error\n empty line is not authorized in map\n", ptr);
 }

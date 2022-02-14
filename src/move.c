@@ -60,7 +60,6 @@ void	ft_push_back(t_utils *ptr, int key)
 
 void	ft_take_exit(t_utils *ptr, int key)
 {
-
 	ft_set_abandonned_square_to_0(ptr, key);
 	(*ptr).move_count++;
 	(*ptr).finish = 1;
@@ -75,7 +74,11 @@ void	ft_destroy_and_update_image_aux(t_utils *ptr, char *str, void **asset)
 		((*ptr).mlx, str_joined, &(*ptr).pixel_x, &(*ptr).pixel_y);
 	ft_free_struct_str(&str_joined);
 	if (!(*asset))
+	{
+		mlx_destroy_window((*ptr).mlx, (*ptr).win);
+		ft_free_struct_utils(ptr);
 		ft_error_and_exit("Failed to load xpm ressources or asset\n");
+	}
 }
 
 void	ft_destroy_and_update_image(t_utils *ptr, int key)
