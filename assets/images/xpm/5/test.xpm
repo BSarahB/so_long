@@ -1,0 +1,24 @@
+/* XPM */
+static char *test[] = {
+/* columns rows colors chars-per-pixel */
+"5 5 13 1 ",
+"  c #6E6A6F",
+". c #6E6B6F",
+"X c #6D6B70",
+"o c #6E6B70",
+"O c #6F6C70",
+"+ c #6F6C71",
+"@ c #6F6D71",
+"# c #6F6D72",
+"$ c #706C71",
+"% c #706D71",
+"& c #716D72",
+"* c #706E72",
+"= c #716E72",
+/* pixels */
+"+#oOX",
+"o%$$.",
+"O*O+@",
+"&=+$o",
+" +.o."
+};

@@ -1,0 +1,9 @@
+/* XPM */
+static char *npxfess[] = {
+/* columns rows colors chars-per-pixel */
+"2 2 1 1 ",
+"  c #817E6D",
+/* pixels */
+"  ",
+"  "
+};

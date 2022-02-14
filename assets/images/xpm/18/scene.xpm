@@ -1,0 +1,25 @@
+/* XPM */
+static char *scene[] = {
+/* columns rows colors chars-per-pixel */
+"18 18 1 1 ",
+"  c gray47",
+/* pixels */
+"                  ",
+"                  ",
+"                  ",
+"                  ",
+"                  ",
+"                  ",
+"                  ",
+"                  ",
+"                  ",
+"                  ",
+"                  ",
+"                  ",
+"                  ",
+"                  ",
+"                  ",
+"                  ",
+"                  ",
+"                  "
+};

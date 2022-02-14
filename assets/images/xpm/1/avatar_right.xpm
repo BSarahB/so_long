@@ -1,0 +1,8 @@
+/* XPM */
+static char *avatar_right[] = {
+/* columns rows colors chars-per-pixel */
+"1 1 1 1 ",
+"  c #B2CEBB",
+/* pixels */
+" "
+};

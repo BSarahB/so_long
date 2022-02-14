@@ -1,0 +1,26 @@
+/* XPM */
+static char *avatar[] = {
+/* columns rows colors chars-per-pixel */
+"4 4 16 1 ",
+"  c #679070",
+". c #61A478",
+"X c #6CA682",
+"o c #7BB490",
+"O c #84B192",
+"+ c #A5C4B0",
+"@ c #B0D0BC",
+"# c #D1D9D1",
+"$ c #D0DBD5",
+"% c #D1DED4",
+"& c #D4E4D9",
+"* c #E4EEE7",
+"= c #EAEEEB",
+"- c #F1F5F2",
+"; c #F7F9F7",
+": c #FEFEFE",
+/* pixels */
+":*&;",
+"$o.@",
+" O+X",
+"#=-%"
+};

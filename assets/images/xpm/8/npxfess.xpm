@@ -1,0 +1,24 @@
+/* XPM */
+static char *npxfess[] = {
+/* columns rows colors chars-per-pixel */
+"8 8 10 1 ",
+"  c #3A351B",
+". c #262627",
+"X c #5E5215",
+"o c #7C6C18",
+"O c #545351",
+"+ c #BBBBBB",
+"@ c #CBCACA",
+"# c #E8E8E8",
+"$ c #E9E9E9",
+"% c #FFFFFF",
+/* pixels */
+"%%#++#%%",
+"%@O..O@%",
+"$OX  XO$",
+"+. oo .+",
+"+. oo .+",
+"$OX  XO$",
+"%@O..O@%",
+"%%#++#%%"
+};

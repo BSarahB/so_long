@@ -1,0 +1,18 @@
+/* XPM */
+static char *collectible[] = {
+/* columns rows colors chars-per-pixel */
+"3 3 9 1 ",
+"  c #C54343",
+". c #B7A48F",
+"X c #DFB7B3",
+"o c #E6BEB9",
+"O c #F3B7BA",
+"+ c #DBD7CD",
+"@ c #DDDACF",
+"# c #FCF1F2",
+"$ c #FDF3F4",
+/* pixels */
+"#O$",
+"X o",
+"+.@"
+};

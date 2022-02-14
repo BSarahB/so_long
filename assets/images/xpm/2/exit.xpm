@@ -1,0 +1,12 @@
+/* XPM */
+static char *exit[] = {
+/* columns rows colors chars-per-pixel */
+"2 2 4 1 ",
+"  c #343027",
+". c #504633",
+"X c #645943",
+"o c #AB915D",
+/* pixels */
+"X ",
+"o."
+};

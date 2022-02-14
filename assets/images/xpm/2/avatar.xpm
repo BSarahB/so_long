@@ -1,0 +1,12 @@
+/* XPM */
+static char *avatar[] = {
+/* columns rows colors chars-per-pixel */
+"2 2 4 1 ",
+"  c #A9C4B1",
+". c #AECBB8",
+"X c #ACCEB8",
+"o c #B8D3C2",
+/* pixels */
+"oX",
+" ."
+};
