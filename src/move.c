@@ -65,6 +65,19 @@ void	ft_take_exit(t_utils *ptr, int key)
 	(*ptr).finish = 1;
 }
 
+int	ft_fail_load_xpm_ressources_for_update_image(t_utils *ptr, char *str)
+{
+		mlx_destroy_image((*ptr).mlx, (*ptr).wall);
+		mlx_destroy_image((*ptr).mlx, (*ptr).collectible);
+		mlx_destroy_image((*ptr).mlx, (*ptr).exit);
+		mlx_destroy_image((*ptr).mlx, (*ptr).scene);
+		mlx_destroy_window((*ptr).mlx, (*ptr).win);
+		mlx_destroy_display((*ptr).mlx);
+		ft_free_struct_utils(ptr);
+		printf("Failed to load xpm ressources or asset : %s.xpm\n", str);
+		exit(0);
+}
+
 void	ft_destroy_and_update_image_aux(t_utils *ptr, char *str, void **asset)
 {
 	char *str_joined;
@@ -74,11 +87,8 @@ void	ft_destroy_and_update_image_aux(t_utils *ptr, char *str, void **asset)
 		((*ptr).mlx, str_joined, &(*ptr).pixel_x, &(*ptr).pixel_y);
 	ft_free_struct_str(&str_joined);
 	if (!(*asset))
-	{
-		mlx_destroy_window((*ptr).mlx, (*ptr).win);
-		ft_free_struct_utils(ptr);
-		ft_error_and_exit("Failed to load xpm ressources or asset\n");
-	}
+		ft_fail_load_xpm_ressources_for_update_image(ptr, "avatar_right");
+
 }
 
 void	ft_destroy_and_update_image(t_utils *ptr, int key)
