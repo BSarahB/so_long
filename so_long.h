@@ -33,8 +33,8 @@
 # define D 100
 # define DEFAULT_XPM_SIZE 32
 # define MIN_XPM_SIZE 1
-# define SCREEN_OFFSET_X 80 //pour compenser le menu de cote
-# define SCREEN_OFFSET_Y 70 //pour compenser le bandeau et la barre de la fenetre
+# define SCREEN_OFFSET_X 80
+# define SCREEN_OFFSET_Y 70
 
 typedef struct s_utils {
 	void	*mlx;
@@ -48,6 +48,7 @@ typedef struct s_utils {
 	int		xpm_size;
 	char	*xpm_path;
 	char	**tab_map;
+	int		flag_empty_line;
 	int		nb_of_players;
 	int		nb_of_collectibles;
 	int		nb_of_exits;
@@ -76,6 +77,10 @@ void		ft_check_number_of_items(t_utils *ptr);
 void		ft_get_images_id(t_utils *ptr);
 int			ft_fail_load_xpm_ressources(t_utils *ptr, char *str);
 int			ft_push_assets_to_window(t_utils *ptr, char **tab_map);
+void		ft_push_avatar_to_window(t_utils *ptr, int i, int j);
+void		ft_push_wall_to_window(t_utils *ptr, int i, int j);
+void		ft_push_scene_to_window(t_utils *ptr, int i, int j);
+void		ft_push_collectible_to_window(t_utils *ptr, int i, int j);
 void		ft_move(t_utils *ptr, int key);
 void		ft_destroy_and_update_image(t_utils *ptr, int key);
 void		ft_move_on(t_utils *ptr, int key);
@@ -84,7 +89,6 @@ void		ft_take_exit(t_utils *ptr, int key);
 void		ft_set_abandonned_square_to_0(t_utils *ptr, int key);
 char		*ft_strrchr(const char *s, int c);
 char		*ft_strjoin2(char const *s1, char const *s2);
-char		*ft_not_strchr(const char *s, int c);
 int			ft_strlen(const char *str);
 int			ft_strcmp(char *s1, char *s2);
 void		ft_putstr_fd(char *s, int fd);
@@ -104,6 +108,13 @@ int			ft_strcmp(char *s1, char *s2);
 char		*ft_strrchr(const char *s, int c);
 float		ft_minimum(float x, float y);
 char		*ft_itoa(int n);
+int			find_length(int n);
 void		ft_rescale(t_utils *ptr);
+float		ft_minimum(float x, float y);
+int			ft_fail_load_xpm_ressources_for_update_image(t_utils *ptr, \
+														char *str);
+void		ft_destroy_and_update_image_aux(t_utils *ptr, char *str, \
+											void **asset);
+void		ft_destroy_and_update_image(t_utils *ptr, int key);
 
 #endif

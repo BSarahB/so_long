@@ -12,9 +12,13 @@ SRCS	=	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/check_map_valid.c \
 			$(SRC_DIR)/utils.c \
 			$(SRC_DIR)/move.c \
-			$(SRC_DIR)/get_map.c \
+			$(SRC_DIR)/get_map_and_images_id.c \
 			$(SRC_DIR)/error_display.c \
-					
+			$(SRC_DIR)/destroy_and_update_image.c \
+			$(SRC_DIR)/rescale.c \
+			$(SRC_DIR)/push_assets_to_window.c \
+			$(SRC_DIR)/utils2.c \
+
 OBJS = $(SRCS:.c=.o)
 
 RM = rm -f
@@ -28,12 +32,11 @@ MLX_FLAGS		=	-lm -lmlx -lXext -lX11
 all:		$(NAME)
 
 .c.o:
-		$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) #clang -Wall -Wextra -Werror -I . -I mlx -03 -c main.c -o main.o$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
+		$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 $(NAME):	$(OBJS)
-	make -C mlx #libmlx.a cree
-	$(CC) $(L_FLAGS) -o $@ $^ $(MLX_FLAGS) #clang -L mlx -o so_long main.o -lm -lmlx -lXext -lX11
-
+	make -C mlx 
+	$(CC) $(L_FLAGS) -o $@ $^ $(MLX_FLAGS) 
 
 clean:
 			make clean -C mlx
